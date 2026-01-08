@@ -1,4 +1,5 @@
 let currentLang = navigator.language.startsWith('ko') ? 'ko' : 'en';
+let manuallyDisabled = new Set();
 let selectedUnits = new Set(); 
 let isLobsterActive = false;
 
@@ -174,4 +175,5 @@ function renderSynergies(synergies) {
 
 
 window.onload = init;
+
 
