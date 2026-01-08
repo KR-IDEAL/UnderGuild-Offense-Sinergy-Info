@@ -3,7 +3,7 @@ const database = {
         { id: "Knight", name: { ko: "기사", en: "Knight" }, image: "Knight.png", synergies: ["Valor"] },
         { id: "Goblin", name: { ko: "고블린", en: "Goblin" }, image: "Goblin.png", synergies: ["Vampire", "Willpower"] },
         { id: "Archer", name: { ko: "궁수", en: "Archer" }, image: "Archer.png", synergies: ["ClockHand", "Reinforcements"] },
-        { id: "Slime", name: { ko: "슬라임", en: "Slime" }, image: "Slime.png", synergies: ["LifeLink", "Blessing"] },
+        { id: "Slime", name: { ko: "슬라임", en: "Slime" }, image: "Slime.png", synergies: ["LifeLink"] },
         { id: "FireSpirit", name: { ko: "불정령", en: "Fire Spirit" }, image: "Fire Spirit.png", synergies: ["VitalPotion", "Vampire"] },
         { id: "Orc", name: { ko: "오크", en: "Orc" }, image: "Orc.png", synergies: ["AbundantOrcBarrel"] },
         { id: "SpearKnight", name: { ko: "창기사", en: "Spear Knight" }, image: "Spear Knight.png", synergies: ["GiantFootprint"] },
@@ -12,7 +12,7 @@ const database = {
         { id: "Ghost", name: { ko: "유령", en: "Ghost" }, image: "Ghost.png", synergies: ["AbundantOrcBarrel"] },
         { id: "BeanSprout", name: { ko: "콩나물", en: "Bean Sprout" }, image: "Bean Sprout.png", synergies: ["ClockHand", "VitalPotion"] },
         { id: "Mold", name: { ko: "곰팡이", en: "Mold" }, image: "Mold.png", synergies: ["Necromancy", "DarkEnergy"] },
-        { id: "Paladin", name: { ko: "팔라딘", en: "Paladin" }, image: "Paladin.png", synergies: [] },
+        { id: "Paladin", name: { ko: "팔라딘", en: "Paladin" }, image: "Paladin.png", synergies: ["Blessing"] },
         { id: "MoaiStatue", name: { ko: "모아이 석상", en: "Moai Statue" }, image: "Moai Statue.png", synergies: ["Valor"] },
         { id: "HawkEarningSheep", name: { ko: "매를 버는 양", en: "Hawk-Earning Sheep" }, image: "Hawk-Earning Sheep.png", synergies: ["GiantFootprint", "Willpower"] },
         { id: "TamedPiranha", name: { ko: "길들여진 피라냐", en: "Tamed Piranha" }, image: "Tamed Piranha.png", synergies: ["DarkEnergy"] },
@@ -70,4 +70,5 @@ const synergyData = {
     "Necromancy": { goals: [2, 3] },
     "DarkEnergy": { goals: [2, 3] },
     "Tentacle": { goals: [2, 3] }
+
 }
