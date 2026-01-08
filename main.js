@@ -57,6 +57,7 @@ function toggleUnit(unitId, tier) {
     
     if (selectedUnits.has(unitId)) {
         selectedUnits.delete(unitId);
+        manuallyDisabled.add(unitId);
         if (card) card.classList.remove('active');
     } else {
         if (tier === 'basic') {
@@ -71,6 +72,7 @@ function toggleUnit(unitId, tier) {
             }
         }
         selectedUnits.add(unitId);
+        manuallyDisabled.delete(unitId);
         if (card) card.classList.add('active');
     }
     updateStatus();
@@ -95,11 +97,14 @@ function updateStatus() {
             if (card) {
                 if (canUnlock) {
                     card.classList.replace('locked', 'unlocked');
-                    selectedUnits.add(unit.id);
-                    card.classList.add('active');
+                    if(!selectedUnits.has(unit.idf) && !manuallyDisabled.has(unit.id)){
+                        selectedUnits.add(unit.id);
+                        card.classList.add('active');
+                    }
                 } else {
                     card.classList.replace('unlocked', 'locked');
                     selectedUnits.delete(unit.id);
+                    manuallyDisabled.delete(unit.id);
                     card.classList.remove('active');
                 }
             }
@@ -169,3 +174,4 @@ function renderSynergies(synergies) {
 
 
 window.onload = init;
+
