@@ -53,8 +53,6 @@ function renderGroup(tier, containerId) {
 }
 
 function toggleUnit(unitId, tier) {
-    // 기본 용병만 수동 클릭이 가능하게 하고 싶다면 여기서 tier === 'basic' 체크를 강화할 수 있습니다.
-    // 하지만 현재는 모든 등급을 클릭으로 토글 가능하게 유지하되, 조합 자동화 로직을 추가합니다.
     const card = document.getElementById(`unit-${unitId}`);
     
     if (selectedUnits.has(unitId)) {
@@ -96,12 +94,10 @@ function updateStatus() {
             
             if (card) {
                 if (canUnlock) {
-                    // ✅ 재료가 다 모이면 잠금 해제 및 자동 활성화(active 클래스 추가)
                     card.classList.replace('locked', 'unlocked');
                     selectedUnits.add(unit.id);
                     card.classList.add('active');
                 } else {
-                    // ✅ 재료가 부족하면 다시 잠금 및 활성화 해제(active 클래스 제거)
                     card.classList.replace('unlocked', 'locked');
                     selectedUnits.delete(unit.id);
                     card.classList.remove('active');
@@ -170,5 +166,6 @@ function renderSynergies(synergies) {
             container.appendChild(item);
         });
 }
+
 
 window.onload = init;
