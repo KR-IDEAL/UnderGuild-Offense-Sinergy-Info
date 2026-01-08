@@ -58,7 +58,9 @@ function toggleUnit(unitId, tier) {
     
     if (selectedUnits.has(unitId)) {
         selectedUnits.delete(unitId);
-        manuallyDisabled.add(unitId);
+        if (tier !== 'basic'){
+            manuallyDisabled.add(unitId);
+        }
         if (card) card.classList.remove('active');
     } else {
         if (tier === 'basic') {
@@ -175,5 +177,6 @@ function renderSynergies(synergies) {
 
 
 window.onload = init;
+
 
 
