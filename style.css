@@ -1,0 +1,205 @@
+body {
+    background-color: #1D1A19; /* 제안하신 어두운 배경색 */
+    color: #ffffff;           /* 배경이 어두우므로 글씨는 하얗게 변경 */
+    margin: 0;
+    padding: 20px;
+}
+
+#options {
+    display: flex;
+    flex-direction: column; /* 버튼과 인원수를 세로로 배치 */
+    align-items: flex-start; /* 왼쪽 정렬 */
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+#lobster-button {
+    display: flex;
+    flex-direction: column; /* 이미지와 '가재 축복' 글자를 세로로 배치 */
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 10px;
+    border: 2px solid #444;
+    background-color: #2a2a2a;
+    transition: 0.2s;
+    filter: grayscale(100%);
+    opacity: 0.4;
+    
+    /* 1.7배 정도 키우기 위한 크기 설정 (기존 용병 카드와 비슷한 느낌) */
+    width: 100px; 
+    height: 110px;
+    padding: 10px;
+}
+
+#lobster-img {
+    width: 60px; /* 기존보다 크게 설정 */
+    height: 60px;
+    margin-bottom: 5px;
+    object-fit: contain;
+}
+
+/* 가재 버튼 텍스트 */
+#lobster-button span {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+/* 가재 활성화 상태 */
+#lobster-button.active {
+    filter: grayscale(0%);
+    opacity: 1;
+    border-color: #ff4500; /* 가재와 어울리는 주황/레드 계열 */
+    box-shadow: 0 0 10px rgba(255, 69, 0, 0.5);
+}
+
+#lobster-img {
+    width: 70px; /* 아주 작은 이미지 크기 */
+    height: 70px;
+    object-fit: contain;
+    margin-right: 5px;
+}
+
+/* 인원 표시 텍스트 위치 조절 */
+#count-display {
+    font-size: 18px;
+    font-weight: bold;
+    color: #ffcc00; /* 강조를 위해 색상 추가 */
+    margin-left: 5px;
+}
+
+/* 기본 그리드 레이아웃 */
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+/* 1. 기본 상태 (잠금/비활성) */
+.unit-card {
+    border: 2px solid #444;
+    text-align: center;
+    cursor: default;
+    transition: all 0.2s ease-in-out;
+    filter: grayscale(100%); /* 흑백 */
+    opacity: 0.2;           /* 아주 흐릿하게 */
+}
+
+/* 2. 조합 가능 상태 (unlocked) - 재료가 다 모였을 때 */
+.unit-card.unlocked {
+    filter: grayscale(0%);  /* 컬러 복구 */
+    opacity: 0.6;           /* 약간 투명 (선택 전이라는 표시) */
+    border-color: #666;
+    cursor: pointer;
+}
+
+/* 3. 선택된 상태 (active) - 클릭했을 때 */
+.unit-card.active {
+    opacity: 1 !important;    /* 완전히 선명하게 */
+    transform: scale(1.05);   /* 살짝 커짐 */
+    filter: grayscale(0%) !important;
+    z-index: 10;
+}
+
+/* --- 등급별 테두리 색상 (클릭 시에만 나타남) --- */
+
+/* 기본 등급: 회색 */
+#basic-container .unit-card.active {
+    border: 4px solid #b0b0b0 !important;
+    box-shadow: 0 0 10px rgba(176, 176, 176, 0.7);
+}
+
+/* 전설 등급: 주황색 */
+#legendary-container .unit-card.active {
+    border: 4px solid #ff8c00 !important;
+    box-shadow: 0 0 15px rgba(255, 140, 0, 0.8);
+}
+
+/* 신화 등급: 흰색 */
+#mythic-container .unit-card.active {
+    border: 4px solid #ffffff !important;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.9);
+}
+
+/* 4. 클릭 불가 상태 (재료 부족) */
+.unit-card.locked {
+    pointer-events: none; /* 클릭 이벤트 차단 */
+}
+
+/* 이미지 크기 고정 */
+.unit-card img {
+    width: 100%;
+    display: block;
+}
+
+/* 이름 텍스트 스타일 */
+.unit-card p {
+    margin: 5px 0;
+    font-size: 12px;
+    color: #ccc;
+}
+
+/* 시너지 리스트 컨테이너 (7열 배치) */
+#active-synergies-list {
+    display: grid;
+    grid-template-columns: repeat(7, 68px); /* 아이콘 크기에 맞춘 7열 */
+    gap: 8px;
+    margin-top: 10px;
+}
+
+/* 시너지 아이콘 공통 스타일 */
+.synergy-item {
+    width: 68px;
+    height: 68px;
+    border-radius: 6px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #222;
+    box-sizing: border-box;
+    transition: all 0.2s ease;
+}
+
+#synergy-header {
+    margin-bottom: 40px; /* 시너지 목록 아래쪽(가재 버튼 위쪽) 여백 확보 */
+}
+
+/* 1. 비활성 상태 (0~1개) */
+.synergy-item.inactive {
+    border: 4px solid #444; /* 옅은 회색 테두리 */
+    filter: grayscale(100%);
+    opacity: 0.4;
+}
+
+/* 2. 은색 상태 (2개) */
+.synergy-item.silver {
+    border: 4px solid #c0c0c0 !important;
+    filter: grayscale(0%);
+    opacity: 1;
+    box-shadow: 0 0 8px rgba(192, 192, 192, 0.4);
+}
+
+/* 3. 금색 상태 (3개 이상 / Medic 2개) */
+.synergy-item.gold {
+    border: 4px solid #ffd700 !important;
+    filter: grayscale(0%);
+    opacity: 1;
+    box-shadow: 0 0 12px rgba(255, 215, 0, 0.5);
+}
+
+.synergy-img {
+    width: 100%; /* 테두리 안에 꽉 차게 */
+    height: 100%;
+    object-fit: cover;
+}
+
+#made-by {
+    text-align: right;
+    font-size: 14px;
+    color: #555;
+    font-weight: bold;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+}

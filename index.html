@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>용병 시너지 시뮬레이터</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="top-bar" style="display: flex; justify-content: space-between; align-items: center;">
+        <div id="lang-switch">
+            <span onclick="changeLang('ko')" class="lang-btn">KO</span> | 
+            <span onclick="changeLang('en')" class="lang-btn">EN</span>
+        </div>
+        <div id="made-by">Made by IDEAL</div>
+    </div>
+    <header id="synergy-header">
+        <h3>활성 시너지</h3>
+        <div id="active-synergies-list"></div>
+    </header>
+
+    <nav id="options">
+        <div id="lobster-button" class="option-card">
+            <img src="images/Crayfish.png" alt="가재" id="lobster-img">
+            <span>가재</span>
+        </div>
+        <span id="count-display"></span>
+    </nav>
+
+    <main>
+        <section class="unit-group">
+            <h2>기본 용병</h2>
+            <div id="basic-container" class="grid-container"></div>
+        </section>
+
+        <section class="unit-group">
+            <h2>전설 용병</h2>
+            <div id="legendary-container" class="grid-container"></div>
+        </section>
+
+        <section class="unit-group">
+            <h2>신화 용병</h2>
+            <div id="mythic-container" class="grid-container"></div>
+        </section>
+    </main>
+
+    <script src="data.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
