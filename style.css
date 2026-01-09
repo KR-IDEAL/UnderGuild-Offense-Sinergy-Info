@@ -1,10 +1,10 @@
 body {
     background-color: #1D1A19;
     color: #ffffff;
-    max-width: 960px;
+    max-width: 1080px;
     margin: 0 auto;
-    width: 95%;
-    padding: 40px 20px;
+    width: 100%;
+    padding: 20px;
     box-sizing: border-box;
 }
 
@@ -186,6 +186,7 @@ body {
     letter-spacing: 1px;
 
 }
+
 
 
 
