@@ -19,9 +19,19 @@
     </header>
 
     <nav id="options">
-        <div id="lobster-button" class="option-card">
-            <img src="images/Crayfish.png" alt="가재" id="lobster-img">
-            <span>가재</span>
+        <div class="button-group">
+            <div id="lobster-button" class="option-card option-btn">
+                <img src="images/Crayfish.png" alt="가재" id="lobster-img">
+                <span>가재</span>
+            </div>
+            <div id="hat-btn-1" class="option-btn item-btn" onclick="openItemSelector(1)">
+                <img src="images/SlimeHat.png" alt="슬라임 모자" class="item-img">
+                <span id="hat-1-name">슬라임 모자</span>
+            </div>
+            <div id="hat-btn-2" class="option-btn item-btn" onclick="openItemSelector(2)">
+                <img src="images/TriKnightHat.png" alt="삼각 기사 투구" class="item-img">
+                <span id="hat-2-name">삼각 기사 투구</span>
+            </div>
         </div>
         <span id="count-display"></span>
     </nav>
