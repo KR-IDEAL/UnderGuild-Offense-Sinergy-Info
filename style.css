@@ -11,12 +11,17 @@ body {
 #options {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
     gap: 15px;
     margin-bottom: 20px;
 }
 
-#lobster-button {
+.button-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.option-btn {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -34,14 +39,14 @@ body {
     padding: 10px;
 }
 
-#lobster-img {
+.option-img {
     width: 60px;
     height: 60px;
     margin-bottom: 5px;
     object-fit: contain;
 }
 
-#lobster-button span {
+.option-btn span {
     font-size: 14px;
     font-weight: bold;
 }
@@ -53,11 +58,11 @@ body {
     box-shadow: 0 0 10px rgba(255, 69, 0, 0.5);
 }
 
-#lobster-img {
-    width: 70px;
-    height: 70px;
-    object-fit: contain;
-    margin-right: 5px;
+.item-btn.active {
+    filter: grayscale(0%);
+    opacity: 1;
+    border-color: #40d63b;
+    box-shadow: 0 0 10px rgba(21, 124, 26, 0.5);
 }
 
 #count-display {
@@ -65,6 +70,7 @@ body {
     font-weight: bold;
     color: #ffcc00;
     margin-left: 5px;
+    margin-top: 5px;
 }
 
 .grid-container {
@@ -186,7 +192,5 @@ body {
     letter-spacing: 1px;
 
 }
-
-
 
 
