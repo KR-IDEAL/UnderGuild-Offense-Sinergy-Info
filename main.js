@@ -2,10 +2,13 @@ let currentLang = navigator.language.startsWith('ko') ? 'ko' : 'en';
 let manuallyDisabled = new Set();
 let selectedUnits = new Set(); 
 let isLobsterActive = false;
+let isHat1Active = false;
+let isHat2Active = false;
+let itemUnits = { 1: null, 2: null};
 
 const uiTexts = {
-    ko: { synergy: "활성 시너지", lobster: "가재", count: "인원", basic: "기본 용병", legendary: "전설 용병", myth: "신화 용병" },
-    en: { synergy: "Active Synergy", lobster: "Crayfish", count: "Units", basic: "Basic", legendary: "Legendary", myth: "Mythic" }
+    ko: { synergy: "활성 시너지", lobster: "가재", count: "인원", basic: "기본 용병", legendary: "전설 용병", myth: "신화 용병", slimehat: "슬라임 모자", knighthat: "삼각 기사 투구" },
+    en: { synergy: "Active Synergy", lobster: "Crayfish", count: "Units", basic: "Basic", legendary: "Legendary", myth: "Mythic", slimehat: "Slime Hat", knighthat: "Tri-Knight Helmet" }
 };
 
 function init() {
@@ -19,6 +22,29 @@ function init() {
             updateStatus();
         };
     }
+
+    const hatBtn1 = document.getElementById('hat-btn-1');
+    if (hatBtn1) {
+        hatBtn1.onclick = () => {
+            isHat1Active = !isHat1Active;
+            hatBtn1.classList.toggle('active');
+            if (isHat1Active) selectedUnits.add('Slime');
+            else selectedUnits.delete('Slime');
+            updateStatus();
+        };
+    }
+
+    const hatBtn2 = document.getElementById('hat-btn-2');
+    if (hatBtn2) {
+        hatBtn2.onclick = () => {
+            isHat2Active = !isHat2Active;
+            hatBtn2.classList.toggle('active');
+            if (isHat2Active) selectedUnits.add('Knight');
+            else selectedUnits.delete('Knight');
+            updateStatus();
+        };
+    }
+
     updateStatus();
 }
 
@@ -48,6 +74,11 @@ function renderGroup(tier, containerId) {
     });
 }
 
+function getMaxCount() {
+    let extra = (isLobsterActive ? 1 : 0) + (isHat1Active ? 1 : 0) + (isHat2Active ? 1 : 0);
+    return 6 + extra;
+}
+
 function toggleUnit(unitId, tier) {
     if (selectedUnits.has(unitId)) {
         selectedUnits.delete(unitId);
@@ -59,7 +90,7 @@ function toggleUnit(unitId, tier) {
             const currentBasicsCount = [...selectedUnits].filter(id => 
                 database.basic.some(b => b.id === id)
             ).length;
-            const maxCount = isLobsterActive ? 7 : 6;
+            const maxCount = getMaxCount();;
             
             if (currentBasicsCount >= maxCount) {
                 alert(currentLang === 'ko' ? `최대 ${maxCount}명까지 선택 가능합니다!` : `Max ${maxCount} units reached!`);
@@ -70,35 +101,30 @@ function toggleUnit(unitId, tier) {
         manuallyDisabled.delete(unitId);
     }
     
-    // 데이터 변경 후 모든 카드의 시각적 상태와 숫자를 새로고침
     updateStatus();
 }
 
 function updateStatus() {
-    // 1. 인원수 표시 업데이트
     const currentBasicsCount = [...selectedUnits].filter(id => 
         database.basic.some(b => b.id === id)
     ).length;
-    const maxCount = isLobsterActive ? 7 : 6;
+    const maxCount = getMaxCount();
     const countEl = document.getElementById('count-display');
     if (countEl) {
         countEl.innerText = `${uiTexts[currentLang].count}: ${currentBasicsCount} / ${maxCount}`;
     }
 
-    // 2. 모든 유닛(기본/전설/신화)의 카드 상태 일괄 업데이트
     for (const tier in database) {
         database[tier].forEach(unit => {
             const card = document.getElementById(`unit-${unit.id}`);
             if (!card) return;
 
-            // [잠금/해제 상태 결정]
             if (tier === 'basic') {
                 card.classList.add('unlocked');
             } else {
                 const canUnlock = unit.requires.every(reqId => selectedUnits.has(reqId));
                 if (canUnlock) {
                     card.classList.replace('locked', 'unlocked');
-                    // 자동 활성화 로직: 해제됐는데 선택 안되어 있고, 수동으로 끈 게 아니라면
                     if (!selectedUnits.has(unit.id) && !manuallyDisabled.has(unit.id)) {
                         selectedUnits.add(unit.id);
                     }
@@ -109,8 +135,6 @@ function updateStatus() {
                 }
             }
 
-            // [최종 시각적 활성화(테두리) 결정]
-            // 데이터(selectedUnits)에 있으면 active를 붙이고, 없으면 뗍니다.
             if (selectedUnits.has(unit.id)) {
                 card.classList.add('active');
             } else {
@@ -128,6 +152,10 @@ function changeLang(lang) {
     if (synH) synH.innerText = uiTexts[lang].synergy;
     const lobS = document.querySelector('#lobster-button span');
     if (lobS) lobS.innerText = uiTexts[lang].lobster;
+    const hat1S = document.getElementById('hat-1-name');
+    if (hat1S) hat1S.innerText = uiTexts[lang].slimehat;
+    const hat2S = document.getElementById('hat-2-name');
+    if (hat2S) hat2S.innerText = uiTexts[lang].knighthat;
     
     const headers = document.querySelectorAll('.unit-group h2');
     if (headers.length >= 3) {
@@ -177,6 +205,5 @@ function renderSynergies(synergies) {
 }
 
 window.onload = init;
-
 
 
