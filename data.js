@@ -20,7 +20,7 @@ const database = {
         { id: "Will-o'-the-Wisp", name: { ko: "도깨비불", en: "Will-o'-the-Wisp" }, image: "Will-o'-the-Wisp.png", synergies: ["Necromancy"] }
     ],
     legendary: [
-        { id: "Hunter", name: { ko: "사냥꾼", en: "Hunter" }, requires: ["Archer"], image: "Hunter.png", synergies: ["ClockHand", "Reinforcements"] },
+        { id: "Hunter", name: { ko: "사냥꾼", en: "Hunter" }, requires: ["Archer"], image: "Hunter.png", synergies: ["Valor", "Reinforcements"] },
         { id: "HammerKnight", name: { ko: "망치 기사", en: "Hammer Knight" }, requires: ["Knight"], image: "Hammer Knight.png", synergies: ["Willpower", "Blessing"] },
         { id: "Tri-HornExecutioner", name: { ko: "삼각두 처형자", en: "Tri-Horn Executioner" }, requires: ["Goblin"], image: "Tri-Horn Executioner.png", synergies: ["DarkEnergy", "LifeLink"] },
         { id: "CursedWarlock", name: { ko: "저주술사", en: "Cursed Warlock" }, requires: ["Slime"], image: "Cursed Warlock.png", synergies: ["Tentacle", "Vampire"] },
@@ -72,3 +72,4 @@ const synergyData = {
     "Tentacle": { goals: [2, 3] }
 
 }
+
