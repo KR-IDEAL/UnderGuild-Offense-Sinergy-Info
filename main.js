@@ -1,4 +1,5 @@
-let currentLang = navigator.language.startsWith('ko') ? 'ko' : 'en';
+let currentLang = navigator.language.startsWith('ko') ? 'ko' : 
+                  navigator.language.startsWith('zh') ? 'zh' : 'en';
 let manuallyDisabled = new Set();
 let selectedUnits = new Set(); 
 let isLobsterActive = false;
@@ -8,7 +9,8 @@ let itemUnits = { 1: null, 2: null};
 
 const uiTexts = {
     ko: { synergy: "활성 시너지", lobster: "가재", count: "인원", basic: "기본 용병", legendary: "전설 용병", myth: "신화 용병", slimehat: "슬라임 모자", knighthat: "삼각 기사 투구" },
-    en: { synergy: "Active Synergy", lobster: "Crayfish", count: "Units", basic: "Basic", legendary: "Legendary", myth: "Mythic", slimehat: "Slime Hat", knighthat: "Tri-Knight Helmet" }
+    en: { synergy: "Active Synergy", lobster: "Crayfish", count: "Units", basic: "Basic", legendary: "Legendary", myth: "Mythic", slimehat: "Slime Hat", knighthat: "Tri-Knight Helmet" },
+    zh: { synergy: "积极协同作用", lobster: "小龙虾", count: "人数", basic: "普通", legendary: "传说", myth: "神话", slimehat: "史莱姆帽子", knighthat: "三角骑士头盔" }
 };
 
 function init() {
